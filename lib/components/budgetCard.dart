@@ -24,40 +24,64 @@ class BudgetCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    budget.nome,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Text(
-                    DateFormat('d MMM y').format(budget.data),
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                ],
+              Expanded(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: 80,
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Text(
+                          'R\$ ' + budget.price.toStringAsFixed(2),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Flexible(
+                          child: Text(
+                            budget.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Text(
+                          DateFormat('d MMMM y', 'pt-br').format(budget.data),
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () => onEditBudget(budget),
-                    icon: Icon(
-                      Icons.edit,
-                      color: Colors.black,
-                      size: 24.0,
-                      semanticLabel: 'Edit',
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                      onPressed: () => onEditBudget(budget),
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                        size: 24.0,
+                        semanticLabel: 'Edit',
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () => onDeleteBudget(budget.id),
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.black,
-                      size: 24.0,
-                      semanticLabel: 'Edit',
+                    IconButton(
+                      onPressed: () => onDeleteBudget(budget.id),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.black,
+                        size: 24.0,
+                        semanticLabel: 'Edit',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

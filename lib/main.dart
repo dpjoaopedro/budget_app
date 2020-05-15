@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'components/budgetCard.dart';
 import 'models/budget.dart';
 
@@ -10,6 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [Locale('pt')],
       title: 'Budget App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -31,10 +37,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _orcamentos = [
-    Budget(id: '1', nome: 'Obra Danilo', data: DateTime.now(), preco: 1565.00),
+  final _budgets = [
     Budget(
-        id: '2', nome: 'Obra Vanderlei', data: DateTime.now(), preco: 1565.00),
+        id: '1',
+        title: 'Reforma Danilo',
+        data: DateTime.now(),
+        price: 150565.00),
+    Budget(
+        id: '2',
+        title: 'Nome muito grandeeeeeee',
+        data: DateTime.now(),
+        price: 10365.00),
   ];
 
   void newBudget() {
@@ -53,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void deleteBudget(String id) {
     setState(() {
-      _orcamentos.removeWhere((budget) => budget.id == id);
+      _budgets.removeWhere((budget) => budget.id == id);
     });
   }
 
@@ -64,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Center(child: Text(widget.title)),
       ),
       body: ListView(
-          children: _orcamentos.map(
+          children: _budgets.map(
         (budget) {
           return BudgetCard(
             budget: budget,
@@ -93,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ListTile(
-                title: Text('Calculos'),
+                title: Text('Cálculos'),
                 onTap: () {
                   Navigator.pop(context);
                 },

@@ -2,15 +2,15 @@ import 'package:flutter/foundation.dart';
 
 class Budget {
   String id;
-  String nome;
+  String title;
   DateTime data;
-  double preco;
+  double price;
 
   Budget({
     @required this.id,
-    @required this.nome,
+    @required this.title,
     @required this.data,
-    @required this.preco
+    @required this.price
   });
 
 }
