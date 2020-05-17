@@ -42,12 +42,15 @@ class BudgetCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Flexible(
-                          child: Text(
-                            budget.title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 16),
+                        Flexible( //Problema - Vc está dando elipsis num width não especificado, logo ele não sabe dar elipsis. Vc pode estar confuso porque vê o resultado na tela já pronto, mas no momento em que o cálculo do width é feito, nessa linha aqui ele ainda não sabe, porque o width é especificado pelos filhos, então a largura total desse container só será conhecida depois dos filhos renderizados. Aí que está o problema.
+                          child: Container( //Encapsulei com container para conseguir especificar um width
+                            width: 180.0, // ajusta para quanto vc quiser
+                            child: Text(
+                              budget.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontSize: 16),
+                            ),
                           ),
                         ),
                         Text(
