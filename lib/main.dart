@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         price: 150565.00),
     Budget(
         id: '2',
-        title: 'Nome muito grandeeeeeee',
+        title: 'Nome muito grandeeeee',
         data: DateTime.now(),
         price: 10365.00),
   ];
@@ -76,16 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Center(child: Text(widget.title)),
       ),
-      body: ListView(
-          children: _budgets.map(
-        (budget) {
-          return BudgetCard(
-            budget: budget,
-            onEditBudget: editBudget,
-            onDeleteBudget: deleteBudget,
-          );
-        },
-      ).toList()),
+      body: ListView.builder(
+          itemCount: _budgets.length,
+          itemBuilder: (BuildContext ctxt, int index) {
+            return BudgetCard(
+              budget: _budgets[index],
+              onEditBudget: editBudget,
+              onDeleteBudget: deleteBudget,
+            );
+          }),
       drawer: Drawer(
         child: Container(
           color: Colors.white,
